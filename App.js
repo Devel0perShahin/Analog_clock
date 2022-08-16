@@ -4,6 +4,8 @@ let Hours_hand = document.querySelector(".Hours");
 
 setInterval(Clock_fn, 1000);
 
+let Digital = document.querySelector(".Digital_clock");
+
 function Clock_fn() {
     Time = new Date();
     Seconds_ratio = Time.getSeconds() / 60;
@@ -19,23 +21,24 @@ function Clock_fn() {
     let M = Time.getMinutes();
     let H = Time.getHours();
 
-    let Digital = document.querySelector(".Digital_clock");
-
-    // if (S < 10) {
-    //   S = "0" + S;
-    // }
+    if (H == 0) {
+        H = 24;
+    }
 
     S = (S < 10 ? "0" + S : S);
     M = (M < 10 ? "0" + M : M);
-    // if(H > 12){
-    //   H = H - 12;
-    // }
 
+
+    let Day_or;
+    if (H => 24 && H <= 11) {
+        Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#333;border-left:3px solid green;">\u00A0AM</p>`;
+    } else {
+        Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#999;border-left:3px solid green;">\u00A0PM</p>`;
+    }
     H = (H > 12 ? H - 12 : H);
 
-    let Digital_time = H + "<p style='color:#666;'>:</p>" + M + "<p style='color:#666;'>:</p>" + S;
-    
-    Digital.innerHTML = Digital_time;
+    // let Digital_time = `${H}  <p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S} <p>${Day_or}</p>`;
+
 }
 
 function Set_rotation(Eliment, Rotation_ratio) {
@@ -65,8 +68,9 @@ function Auto_ratio_set(Full_area) {
     //SET PROPERTY VALUE
     // Full_area = `${Content_ratio + "px"}`;
     Full_area.style.cssText = `width:${Content_ratio + "px"};`
+    Digital.style.cssText = `margin-top:-${Content_ratio / 100 * 30 + "px"};font-size:${Content_ratio / 100 * 5 + "px"};`;
 }
 Auto_ratio_set(Full_area);
 onresize = () => {
-    Auto_ratio_set(Full_area)
+    Auto_ratio_set(Full_area);
 };

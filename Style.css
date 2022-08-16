@@ -76,20 +76,18 @@ div.Digital_clock {
     background: #d4f1f9;
     border-radius: 5%;
     height: 10%;
-    width: 30%;
+    width: 35%;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
     font-family: 'Arial';
-
-    font-size: 5vh;
     display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: -30vh;
+    /* margin-top: -30vh; */
     z-index: 1;
 }
