@@ -20,6 +20,7 @@ function Clock_fn() {
     // =========== DIGITAL CLOCK ===========
     let S = Time.getSeconds();
     let M = Time.getMinutes();
+    // let H = 14;
     let H = Time.getHours();
 
     if (H == 0) {
@@ -30,21 +31,24 @@ function Clock_fn() {
     S = (S < 10 ? "0" + S : S);
     M = (M < 10 ? "0" + M : M);
 
-    
+
     let Day_or;
-    if (H => 24 && H <= 11) {
-        H = (H > 12 ? H - 12 : H);
-        Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#333;border-left:3px solid green;">\u00A0AM</p>`;
-    } else {
-        H = (H > 12 ? H - 12 : H);
-        Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#999;border-left:3px solid green;">\u00A0PM</p>`;
+
+    if (H < 12 || H == 24) {
+        Day_or = "AM"
+    }
+    if (H > 11 && H < 24) {
+        Day_or = "PM"
     }
 
+    H = (H > 12 ? H - 12 : H);
+    Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#333;border-left:3px solid green;">\u00A0${Day_or}</p>`;
+
     if (Opacity == true) {
-        document.querySelectorAll(".Digital_clock p")[2].style.cssText="border-left:3px solid green;";
+        document.querySelectorAll(".Digital_clock p")[2].style.cssText = "border-left:3px solid green;";
         Opacity = false;
     } else {
-        document.querySelectorAll(".Digital_clock p")[2].style.cssText="border-left:3px solid red;";
+        document.querySelectorAll(".Digital_clock p")[2].style.cssText = "border-left:3px solid red;";
         Opacity = true;
     }
 }
