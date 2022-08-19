@@ -5,6 +5,7 @@ let Hours_hand = document.querySelector(".Hours");
 setInterval(Clock_fn, 1000);
 
 let Digital = document.querySelector(".Digital_clock");
+let Opacity = true;
 
 function Clock_fn() {
     Time = new Date();
@@ -23,23 +24,33 @@ function Clock_fn() {
 
     if (H == 0) {
         H = 24;
-    }
+    };
+
 
     S = (S < 10 ? "0" + S : S);
     M = (M < 10 ? "0" + M : M);
 
-
+    
     let Day_or;
     if (H => 24 && H <= 11) {
+        H = (H > 12 ? H - 12 : H);
         Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#333;border-left:3px solid green;">\u00A0AM</p>`;
     } else {
+        H = (H > 12 ? H - 12 : H);
         Digital.innerHTML = `${H}<p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S}\u00A0<p style="color:#999;border-left:3px solid green;">\u00A0PM</p>`;
     }
-    H = (H > 12 ? H - 12 : H);
 
-    // let Digital_time = `${H}  <p style='color:#666;'>:</p> ${M} <p style='color:#666;'>:</p>  ${S} <p>${Day_or}</p>`;
-
+    if (Opacity == true) {
+        document.querySelectorAll(".Digital_clock p")[2].style.cssText="border-left:3px solid green;";
+        Opacity = false;
+    } else {
+        document.querySelectorAll(".Digital_clock p")[2].style.cssText="border-left:3px solid red;";
+        Opacity = true;
+    }
 }
+// document.querySelectorAll(".Digital_clock p")[1].style.opacity="0"
+
+
 
 function Set_rotation(Eliment, Rotation_ratio) {
     Eliment.style.setProperty('--rotation', Rotation_ratio * 360)
@@ -69,6 +80,14 @@ function Auto_ratio_set(Full_area) {
     // Full_area = `${Content_ratio + "px"}`;
     Full_area.style.cssText = `width:${Content_ratio + "px"};`
     Digital.style.cssText = `margin-top:-${Content_ratio / 100 * 30 + "px"};font-size:${Content_ratio / 100 * 5 + "px"};`;
+
+    document.querySelector(".Clock_container .Seconds").style.cssText = `width:${Content_ratio / 100 * 0.8 + "px"}`;
+    document.querySelector(".Clock_container .Minutes").style.cssText = `width:${Content_ratio / 100 * 1.4 + "px"}`;
+    document.querySelector(".Clock_container .Hours").style.cssText = `width:${Content_ratio / 100 * 2.5 + "px"}`;
+
+    document.querySelectorAll(".Clock_container .Hands").forEach(Element => {
+        Element.style.cssText = `border:${Content_ratio / 100 * 0.001 + "px"} solid #fff;`;
+    })
 }
 Auto_ratio_set(Full_area);
 onresize = () => {

@@ -12,6 +12,8 @@
     aspect-ratio: 1;
     margin: 0 auto;
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .Clock_container::after {
@@ -21,7 +23,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     content: "";
-    height: 4%;
+    height: 5%;
     aspect-ratio: 1;
     border-radius: 100%;
     background-color: #464646;
@@ -49,7 +51,7 @@
     -ms-transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
     -o-transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
     border-radius: 100px;
-    border: 0.01vh solid #fff;
+    /* border: 0.01vh solid #fff; */
     background-color: rgb(252, 56, 56);
 }
 
